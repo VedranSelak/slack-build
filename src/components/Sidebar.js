@@ -1,8 +1,18 @@
 import styled from 'styled-components'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
+import SidebarOption from './SidebarOption';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useSelector, useDispatch } from 'react-redux'
+import { hideModal, selectModal, showModal } from '../features/modalSlice'
+import ModalItem from './ModalItem';
+
 
 const Sidebar = () => {
+
+    const modal = useSelector(selectModal)
+    const dispatch = useDispatch()
+
     return (
         <SidebarContainer>
             <SidebarHeader>
@@ -12,6 +22,17 @@ const Sidebar = () => {
                 </SidebarName>
                 <EditIcon />
             </SidebarHeader>
+            <SidebarOption browse={true} Icon={MoreVertIcon} title='Browse Slack' />
+            { modal ? <ExtendModal onClick={() => dispatch(hideModal())}>
+                            <div className="container">
+                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                            </div>
+                        </ExtendModal> : '' }
+                        <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
+                        <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
         </SidebarContainer>
     )
 }
@@ -32,6 +53,7 @@ const SidebarHeader = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    border-bottom: 1px solid #49274b;
 
     :hover {
         background-color: var(--primary-color);
@@ -59,5 +81,27 @@ const SidebarName = styled.div`
     > .MuiSvgIcon-root {
         font-size: 16px;
         margin-left: 3px;
+    }
+`;
+
+const ExtendModal = styled.div`
+    background-color: transparent;
+    position: absolute;
+    top:0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 5;
+
+    > .container {
+        background-color: white;
+        padding: 10px 0;
+        width: 20rem;
+        height: 20rem;
+        margin-top: 140px;
+        margin-left: 25px;
+        z-index: 6;
+        border-radius: 10px;
+        border: 1px solid lightgray;
+        overflow: hidden;
     }
 `;
