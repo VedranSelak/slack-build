@@ -4,7 +4,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SidebarOption from './SidebarOption';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModal, selectModal } from '../features/modalSlice'
+import { hideModal, selectModal, showModal } from '../features/modalSlice'
 import MenuIcon from '@material-ui/icons/Menu';
 import ModalItem from './ModalItem';
 import ForumIcon from '@material-ui/icons/Forum';
@@ -15,9 +15,14 @@ import PageviewIcon from '@material-ui/icons/Pageview';
 import ListIcon from '@material-ui/icons/List';
 import PeopleIcon from '@material-ui/icons/People';
 import AppsIcon from '@material-ui/icons/Apps';
-
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import AddIcon from '@material-ui/icons/Add';
+import { db } from '../firebase.js';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 const Sidebar = () => {
+
+    const [channels, loading, error] = useCollection(db.collection('channels'))
 
     const modal = useSelector(selectModal)
     const dispatch = useDispatch()
@@ -31,7 +36,12 @@ const Sidebar = () => {
                 </SidebarName>
                 <EditIcon />
             </SidebarHeader>
-            <SidebarOption browse={true} Icon={MoreVertIcon} title='Browse Slack' />
+            <SidebarOptionStatic>
+                <div onClick={() => dispatch(showModal())}>
+                    <MoreVertIcon />
+                    <h3>Browse Slack</h3>
+                </div>
+            </SidebarOptionStatic>
             { modal ? <ExtendModal onClick={() => dispatch(hideModal())}>
                             <Container>
                                 <ContainerTopSection>
@@ -52,8 +62,8 @@ const Sidebar = () => {
                                 </ContainerBottomSection>
                             </Container>
                      </ExtendModal> : '' }
-            <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
-            <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
+            <SidebarOption Icon={ArrowDropDownIcon} IconTwo={AddIcon} title='Channels' array={channels?.docs}/>
+            <SidebarOption Icon={ArrowDropDownIcon} IconTwo={AddIcon} title='Direct messages' />
         </SidebarContainer>
     )
 }
@@ -102,6 +112,31 @@ const SidebarName = styled.div`
     > .MuiSvgIcon-root {
         font-size: 16px;
         margin-left: 3px;
+    }
+`;
+
+const SidebarOptionStatic = styled.div`
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: lightgrey;
+    padding: 10px;
+    
+    > div {
+        display: flex;
+        align-items: center;
+    }
+
+    > div > h3 {
+        font-weight: 200;
+        padding-left: 3px;
+    }
+
+    :hover {
+        > div {
+            color: white;
+            cursor: pointer;
+        }
     }
 `;
 
