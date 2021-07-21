@@ -33,24 +33,24 @@ const Sidebar = () => {
             </SidebarHeader>
             <SidebarOption browse={true} Icon={MoreVertIcon} title='Browse Slack' />
             { modal ? <ExtendModal onClick={() => dispatch(hideModal())}>
-                            <div className="container">
-                                <div className="top">
+                            <Container>
+                                <ContainerTopSection>
                                     <ModalItem Icon={MenuIcon} title='All unreads' shortcut='' />
                                     <ModalItem Icon={ForumIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
                                     <ModalItem Icon={AlternateEmailIcon} title='Mentions & reactions' shortcut='' />
                                     <ModalItem Icon={BookmarkIcon} title='Saved items' shortcut='Ctrl+Shift+S' />
-                                </div>
-                                <div className="middle">
+                                </ContainerTopSection>
+                                <ContainerMiddleSection>
                                     <ModalItem Icon={AssistantPhotoIcon} title='Slack Connect' shortcut='' />
                                     <ModalItem Icon={PageviewIcon} title='Channel browse' shortcut='Ctrl+Shift+L' />
                                     <ModalItem Icon={ListIcon} title='File browser' shortcut='' />
                                     <ModalItem Icon={PeopleIcon} title='People & user groups' shortcut='Ctrl+Shift+E' />
                                     <ModalItem Icon={AppsIcon} title='Apps' shortcut='' />
-                                </div>
-                                <div className="bottom">
+                                </ContainerMiddleSection>
+                                <ContainerBottomSection>
                                     <p>Customize this list in your <span>preferences.</span></p>
-                                </div>
-                            </div>
+                                </ContainerBottomSection>
+                            </Container>
                      </ExtendModal> : '' }
             <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
             <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
@@ -112,44 +112,47 @@ const ExtendModal = styled.div`
     height: 100vh;
     width: 100vw;
     z-index: 5;
+`;
 
-    > .container {
-        background-color: white;
-        padding: 10px 0;
-        width: 20rem;
-        height: 21rem;
-        margin-top: 140px;
-        margin-left: 25px;
-        z-index: 6;
-        border-radius: 10px;
-        border: 1px solid lightgray;
-        overflow: hidden;
-    }
+const Container = styled.div`
+    background-color: white;
+    padding: 10px 0;
+    width: 20rem;
+    height: 21rem;
+    margin-top: 140px;
+    margin-left: 25px;
+    z-index: 6;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    overflow: hidden;
+`;
 
-    > .container > .top {
-        border-bottom: 1px solid lightgrey;
-        padding-bottom: 10px;
-    }
-    > .container > .middle {
-        border-bottom: 1px solid lightgrey;
-        padding: 10px 0;
-    }
-    > .container > .bottom {
-        color: #484848;
-        height: 40px;
-        display: flex;
-        font-weight: 500;
-        align-items: center;
-        font-size: 12px;
-        padding-left: 20px;
-    }
+const ContainerTopSection = styled.div`
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 10px;
+`;
 
-    > .container > .bottom > p > span{
+const ContainerMiddleSection = styled.div`
+    border-bottom: 1px solid lightgrey;
+    padding: 10px 0;
+`;
+
+const ContainerBottomSection = styled.div`
+    color: #484848;
+    height: 40px;
+    display: flex;
+    font-weight: 500;
+    align-items: center;
+    font-size: 12px;
+    padding-left: 20px;
+
+
+    > p > span{
         color: #0E76A8;
         font-weight: bold;
     }
 
-    > .container > .bottom:hover{
+    :hover{
         color: white !important;
         background-color: #0E76A8;
         cursor: pointer;

@@ -3,10 +3,10 @@ import styled from 'styled-components'
 const ModalItem = ( { Icon, title, shortcut } ) => {
     return (
         <ModalItemContainer>
-            <div>
+            <ModalMain>
                 <Icon />
                 <h3>{title}</h3>
-            </div>
+            </ModalMain>
             <p>{shortcut}</p>
         </ModalItemContainer>
     )
@@ -28,6 +28,10 @@ const ModalItemContainer = styled.div`
         background-color: #0E76A8;
         color: white;
         cursor: pointer;
+
+        > p {
+            color: white;
+        }
     }
 
     > p {
@@ -35,21 +39,21 @@ const ModalItemContainer = styled.div`
         margin-right: 10px;
         color: grey;
     }
+`;
 
-    > div {
-        font-size: 12px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        padding: 0;
-        margin-left: 15px;
-    }
+const ModalMain = styled.div`
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-left: 15px;
 
-    > div > h3 {
+    > h3 {
         font-weight: 200;
     }
 
-    > div .MuiSvgIcon-root {
+    > .MuiSvgIcon-root {
         font-size: 20px;
         margin-right: 10px;
     }
