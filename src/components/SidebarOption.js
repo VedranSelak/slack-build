@@ -18,8 +18,8 @@ const SidebarOption = ( { Icon, IconTwo, title, array } ) => {
     }
 
     return (
-        <div onClick={() => setActive(!active)}>
-            <Header>
+        <>
+            <Header onClick={() => setActive(!active)}>
                 <SidebarMain className={active ? 'active' : ''}>
                     <Icon onClick={() => setActive(!active)} />
                     <h3>{title}</h3>
@@ -31,7 +31,7 @@ const SidebarOption = ( { Icon, IconTwo, title, array } ) => {
                     <Channel key={item.id} id={item.id} title={item.data().name} />
                 ))}
             </ChannelList>
-        </div>
+        </>
     )
 }
 
@@ -46,7 +46,7 @@ const SidebarMain = styled.div`
 
     &.active {
         > .MuiSvgIcon-root {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
             transition: all 0.3s ease-in-out;
         }
     }

@@ -1,10 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { enterChannel } from '../features/appSlice'
 
 const Channel = ( { id, title} ) => {
 
+    const dispatch = useDispatch()
+
     const selectChannel = () => {
-        
+        dispatch(enterChannel({
+            channelId: id,
+        }));
     }
 
     return (

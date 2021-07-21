@@ -15,7 +15,7 @@ import PageviewIcon from '@material-ui/icons/Pageview';
 import ListIcon from '@material-ui/icons/List';
 import PeopleIcon from '@material-ui/icons/People';
 import AppsIcon from '@material-ui/icons/Apps';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import AddIcon from '@material-ui/icons/Add';
 import { db } from '../firebase.js';
 import { useCollection } from 'react-firebase-hooks/firestore';
@@ -62,8 +62,8 @@ const Sidebar = () => {
                                 </ContainerBottomSection>
                             </Container>
                      </ExtendModal> : '' }
-            <SidebarOption Icon={ArrowDropDownIcon} IconTwo={AddIcon} title='Channels' array={channels?.docs}/>
-            <SidebarOption Icon={ArrowDropDownIcon} IconTwo={AddIcon} title='Direct messages' />
+            <SidebarOption Icon={ArrowRightIcon} IconTwo={AddIcon} title='Channels' array={channels?.docs}/>
+            <SidebarOption Icon={ArrowRightIcon} IconTwo={AddIcon} title='Direct messages' />
         </SidebarContainer>
     )
 }
