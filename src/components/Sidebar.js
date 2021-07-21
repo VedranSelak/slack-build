@@ -4,8 +4,17 @@ import EditIcon from '@material-ui/icons/Edit';
 import SidebarOption from './SidebarOption';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModal, selectModal, showModal } from '../features/modalSlice'
+import { hideModal, selectModal } from '../features/modalSlice'
+import MenuIcon from '@material-ui/icons/Menu';
 import ModalItem from './ModalItem';
+import ForumIcon from '@material-ui/icons/Forum';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import AssistantPhotoIcon from '@material-ui/icons/AssistantPhoto';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import ListIcon from '@material-ui/icons/List';
+import PeopleIcon from '@material-ui/icons/People';
+import AppsIcon from '@material-ui/icons/Apps';
 
 
 const Sidebar = () => {
@@ -25,14 +34,26 @@ const Sidebar = () => {
             <SidebarOption browse={true} Icon={MoreVertIcon} title='Browse Slack' />
             { modal ? <ExtendModal onClick={() => dispatch(hideModal())}>
                             <div className="container">
-                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
-                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
-                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
-                                <ModalItem Icon={EditIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                                <div className="top">
+                                    <ModalItem Icon={MenuIcon} title='All unreads' shortcut='' />
+                                    <ModalItem Icon={ForumIcon} title='All DMs' shortcut='Ctrl+Shift+K' />
+                                    <ModalItem Icon={AlternateEmailIcon} title='Mentions & reactions' shortcut='' />
+                                    <ModalItem Icon={BookmarkIcon} title='Saved items' shortcut='Ctrl+Shift+S' />
+                                </div>
+                                <div className="middle">
+                                    <ModalItem Icon={AssistantPhotoIcon} title='Slack Connect' shortcut='' />
+                                    <ModalItem Icon={PageviewIcon} title='Channel browse' shortcut='Ctrl+Shift+L' />
+                                    <ModalItem Icon={ListIcon} title='File browser' shortcut='' />
+                                    <ModalItem Icon={PeopleIcon} title='People & user groups' shortcut='Ctrl+Shift+E' />
+                                    <ModalItem Icon={AppsIcon} title='Apps' shortcut='' />
+                                </div>
+                                <div className="bottom">
+                                    <p>Customize this list in your <span>preferences.</span></p>
+                                </div>
                             </div>
-                        </ExtendModal> : '' }
-                        <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
-                        <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
+                     </ExtendModal> : '' }
+            <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
+            <SidebarOption Icon={MoreVertIcon} title='Browse Slack' />
         </SidebarContainer>
     )
 }
@@ -96,12 +117,45 @@ const ExtendModal = styled.div`
         background-color: white;
         padding: 10px 0;
         width: 20rem;
-        height: 20rem;
+        height: 21rem;
         margin-top: 140px;
         margin-left: 25px;
         z-index: 6;
         border-radius: 10px;
         border: 1px solid lightgray;
         overflow: hidden;
+    }
+
+    > .container > .top {
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 10px;
+    }
+    > .container > .middle {
+        border-bottom: 1px solid lightgrey;
+        padding: 10px 0;
+    }
+    > .container > .bottom {
+        color: #484848;
+        height: 40px;
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        font-size: 12px;
+        padding-left: 20px;
+    }
+
+    > .container > .bottom > p > span{
+        color: #0E76A8;
+        font-weight: bold;
+    }
+
+    > .container > .bottom:hover{
+        color: white !important;
+        background-color: #0E76A8;
+        cursor: pointer;
+
+        > p > span {
+            color: white;
+        }
     }
 `;
